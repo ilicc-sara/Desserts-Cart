@@ -63,6 +63,7 @@ function App() {
     <>
       <div class="desserts-list">
         <h1>Desserts</h1>
+        <article class="desert-item"></article>
       </div>
       <div class="cart"></div>
     </>

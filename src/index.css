@@ -11,6 +11,14 @@
 .desserts-list {
   background-color: palevioletred;
   height: 100%;
+  position: relative;
+  padding-top: 30px;
+}
+
+h1 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
 }
 
 .cart {
