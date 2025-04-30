@@ -61,7 +61,10 @@ const info = [
 function App() {
   return (
     <>
-      <h1>Desserts</h1>
+      <div class="desserts-list">
+        <h1>Desserts</h1>
+      </div>
+      <div class="cart"></div>
     </>
   );
 }
