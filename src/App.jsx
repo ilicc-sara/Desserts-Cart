@@ -81,7 +81,9 @@ const info = [
 function App() {
   const [items, setItems] = useState(info);
 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([
+    // { name: "Sara", id: 1, price: 70, amount: 3 },
+  ]);
 
   const totalAmount = items.reduce((acc, cur) => {
     return acc + cur.amount;
@@ -111,7 +113,14 @@ function App() {
         ))}
       </div>
       <div class="cart">
-        <h3 onClick={() => setCartItems([])}>
+        <h3
+        // onClick={() =>
+        //   setCartItems((previous) => [
+        //     ...previous,
+        //     { name: "Ljubisa", id: 2, price: 40, amount: 2 },
+        //   ])
+        // }
+        >
           Your Cart (<span>{totalAmount}</span>)
         </h3>
 
@@ -123,14 +132,13 @@ function App() {
           <p>Your added items will appear here</p>
         </div>
 
-        <div class="cart-list">
-          {cartItems.map((cartItem) => (
+        <div class={`cart-list ${cartItems.length === 0 ? "hidded" : ""}`}>
+          {cartItems.map((cartItem, index) => (
             <CartItem
-              key={cartItem.id}
+              key={index}
               name={cartItem.name}
               price={cartItem.price}
               amount={cartItem.amount}
-              totalPrice={cartItem.amount * cartItem.price}
               id={cartItem.id}
             />
           ))}

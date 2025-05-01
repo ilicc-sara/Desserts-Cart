@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 function CartItem(props) {
-  const { name, price, amount, totalPrice, id } = props;
+  const { name, price, amount, id } = props;
+
+  const totalPrice = Number(amount) * Number(price);
   return (
-    <article class="cart-item">
-      <p>Waffle with Berries</p>
+    <article data-id={id} class="cart-item">
+      <p>{name}</p>
       <div class="cart-item-info">
-        <span>3X</span> <span>@ $6.50</span> <span>@ 19.5</span>
+        <span>{amount}X</span>
+        <span>@ ${price}</span> <span>@ {totalPrice}</span>
       </div>
 
       <button class="delete-btn">X</button>

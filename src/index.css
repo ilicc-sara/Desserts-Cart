@@ -123,3 +123,9 @@ h1 {
   background: none;
   cursor: pointer;
 }
+
+.cart-item-info {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
