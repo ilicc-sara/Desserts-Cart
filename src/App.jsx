@@ -33,7 +33,7 @@ const info = [
     price: 5.5,
     image: "./image-tiramisu-desktop.jpg",
     id: 4,
-    amount: 1,
+    amount: 0,
   },
   {
     type: "Baklava",
@@ -65,7 +65,7 @@ const info = [
     price: 4.5,
     image: "./image-brownie-desktop.jpg",
     id: 8,
-    amount: 1,
+    amount: 0,
   },
   {
     type: "Panna Cotta",
@@ -92,17 +92,31 @@ function App() {
             image={item.image}
             id={item.id}
             amount={item.amount}
+            setItems={setItems}
           />
         ))}
       </div>
       <div class="cart">
         <h3>
-          Your Cart (<span>0</span>)
+          Your Cart (
+          <span>
+            {items.reduce((acc, cur) => {
+              return acc + cur.amount;
+            }, 0)}
+            {/* {items.reduce((acc, cur) => {
+              return acc + cur.price * cur.amount;
+            }, 0)} */}
+          </span>
+          )
         </h3>
 
         <div class="display-empty-cart">
           <img src="./illustration-empty-cart.svg" class="empty-cart-img" />
           <p>Your added items will appear here</p>
+        </div>
+
+        <div class="cart-list">
+          <article></article>
         </div>
       </div>
     </>
