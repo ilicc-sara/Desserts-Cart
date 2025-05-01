@@ -33,7 +33,7 @@ const info = [
     price: 5.5,
     image: "./image-tiramisu-desktop.jpg",
     id: 4,
-    amount: 0,
+    amount: 1,
   },
   {
     type: "Baklava",
@@ -65,7 +65,7 @@ const info = [
     price: 4.5,
     image: "./image-brownie-desktop.jpg",
     id: 8,
-    amount: 0,
+    amount: 1,
   },
   {
     type: "Panna Cotta",
@@ -91,6 +91,7 @@ function App() {
             price={item.price}
             image={item.image}
             id={item.id}
+            amount={item.amount}
           />
         ))}
       </div>
