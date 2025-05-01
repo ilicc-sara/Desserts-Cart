@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import Item from "./Item.jsx";
+import CartItem from "./CartItem.jsx";
 
 const info = [
   {
     type: "Waffle",
     name: "Waffle with Berries",
     price: 6.5,
-    image: "./image-waffle-desktop.jpg",
+    image: "./images/image-waffle-desktop.jpg",
     id: 1,
     amount: 0,
   },
@@ -15,7 +16,7 @@ const info = [
     type: "Crème Brûlée",
     name: "Vanilla Bean Crème Brûlée",
     price: 7.0,
-    image: "./image-creme-brulee-desktop.jpg",
+    image: "./images/image-creme-brulee-desktop.jpg",
     id: 2,
     amount: 0,
   },
@@ -23,7 +24,7 @@ const info = [
     type: "Macaron",
     name: "Macaron Mix of Five",
     price: 8.0,
-    image: "./image-macaron-desktop.jpg",
+    image: "./images/image-macaron-desktop.jpg",
     id: 3,
     amount: 0,
   },
@@ -31,7 +32,7 @@ const info = [
     type: "Tiramisu",
     name: "Classic Tiramisu",
     price: 5.5,
-    image: "./image-tiramisu-desktop.jpg",
+    image: "./images/image-tiramisu-desktop.jpg",
     id: 4,
     amount: 0,
   },
@@ -39,7 +40,7 @@ const info = [
     type: "Baklava",
     name: "Pistachio Baklava",
     price: 4.0,
-    image: "./image-baklava-desktop.jpg",
+    image: "./images/image-baklava-desktop.jpg",
     id: 5,
     amount: 0,
   },
@@ -47,7 +48,7 @@ const info = [
     type: "Pie",
     name: "Lemon Meringue Pie",
     price: 5.0,
-    image: "./image-meringue-desktop.jpg",
+    image: "./images/image-meringue-desktop.jpg",
     id: 6,
     amount: 0,
   },
@@ -55,7 +56,7 @@ const info = [
     type: "Cake",
     name: "Red Velvet Cake",
     price: 4.5,
-    image: "./image-cake-desktop.jpg",
+    image: "./images/image-cake-desktop.jpg",
     id: 7,
     amount: 0,
   },
@@ -63,7 +64,7 @@ const info = [
     type: "Brownie",
     name: "Salted Caramel Brownie",
     price: 4.5,
-    image: "./image-brownie-desktop.jpg",
+    image: "./images/image-brownie-desktop.jpg",
     id: 8,
     amount: 0,
   },
@@ -71,7 +72,7 @@ const info = [
     type: "Panna Cotta",
     name: "Vanilla Panna Cotta",
     price: 6.5,
-    image: "./image-panna-cotta-desktop.jpg",
+    image: "./images/image-panna-cotta-desktop.jpg",
     id: 9,
     amount: 0,
   },
@@ -79,6 +80,8 @@ const info = [
 
 function App() {
   const [items, setItems] = useState(info);
+
+  const [cartItems, setCartItems] = useState([]);
 
   const totalAmount = items.reduce((acc, cur) => {
     return acc + cur.amount;
@@ -103,29 +106,34 @@ function App() {
             id={item.id}
             amount={item.amount}
             setItems={setItems}
+            setCartItems={setCartItems}
           />
         ))}
       </div>
       <div class="cart">
-        <h3>
+        <h3 onClick={() => setCartItems([])}>
           Your Cart (<span>{totalAmount}</span>)
         </h3>
 
         <div class={`display-empty-cart ${totalAmount === 0 ? "" : "hidden"}`}>
-          <img src="./illustration-empty-cart.svg" class="empty-cart-img" />
+          <img
+            src="./images/illustration-empty-cart.svg"
+            class="empty-cart-img"
+          />
           <p>Your added items will appear here</p>
         </div>
 
         <div class="cart-list">
-          <article class="cart-item">
-            <p>Waffle with Berries</p>
-            <div class="cart-item-info">
-              <span>3X</span> <span>@ $6.50</span> <span>@ 19.5</span>
-            </div>
-
-            <button class="delete-btn">X</button>
-          </article>
-
+          {cartItems.map((cartItem) => (
+            <CartItem
+              key={cartItem.id}
+              name={cartItem.name}
+              price={cartItem.price}
+              amount={cartItem.amount}
+              totalPrice={cartItem.amount * cartItem.price}
+              id={cartItem.id}
+            />
+          ))}
           <h3> Order Total: $ {totalPrice}</h3>
         </div>
       </div>

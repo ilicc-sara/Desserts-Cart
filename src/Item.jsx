@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 function Item(props) {
-  const { type, name, price, image, amount, setItems, id } = props;
+  const { type, name, price, image, amount, setItems, id, setCartItems } =
+    props;
 
   function increaseAmount(id) {
     setItems((previous) =>
@@ -27,7 +28,10 @@ function Item(props) {
         {/* <div class="cart-button-empty"> */}
         <div
           class={`cart-button-empty ${amount === 0 ? "" : "hidden"}`}
-          onClick={() => increaseAmount(id)}
+          onClick={() => {
+            // setCartItems({ name: name });
+            increaseAmount(id);
+          }}
         >
           <i class="bx bx-cart-add">
             {" "}
