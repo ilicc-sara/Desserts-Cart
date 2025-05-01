@@ -1,6 +1,6 @@
 #container {
   width: 1200px;
-  height: 600px;
+  height: fit-content;
   margin: 20px auto;
   background-color: wheat;
   padding: 20px;

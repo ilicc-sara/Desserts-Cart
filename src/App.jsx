@@ -9,6 +9,7 @@ const info = [
     price: 6.5,
     image: "./image-waffle-desktop.jpg",
     id: 1,
+    amount: 0,
   },
   {
     type: "Crème Brûlée",
@@ -16,6 +17,7 @@ const info = [
     price: 7.0,
     image: "./image-creme-brulee-desktop.jpg",
     id: 2,
+    amount: 0,
   },
   {
     type: "Macaron",
@@ -23,6 +25,7 @@ const info = [
     price: 8.0,
     image: "./image-macaron-desktop.jpg",
     id: 3,
+    amount: 0,
   },
   {
     type: "Tiramisu",
@@ -30,6 +33,7 @@ const info = [
     price: 5.5,
     image: "./image-tiramisu-desktop.jpg",
     id: 4,
+    amount: 0,
   },
   {
     type: "Baklava",
@@ -37,6 +41,7 @@ const info = [
     price: 4.0,
     image: "./image-baklava-desktop.jpg",
     id: 5,
+    amount: 0,
   },
   {
     type: "Pie",
@@ -44,6 +49,7 @@ const info = [
     price: 5.0,
     image: "./image-meringue-desktop.jpg",
     id: 6,
+    amount: 0,
   },
   {
     type: "Cake",
@@ -51,6 +57,7 @@ const info = [
     price: 4.5,
     image: "./image-cake-desktop.jpg",
     id: 7,
+    amount: 0,
   },
   {
     type: "Brownie",
@@ -58,6 +65,7 @@ const info = [
     price: 4.5,
     image: "./image-brownie-desktop.jpg",
     id: 8,
+    amount: 0,
   },
   {
     type: "Panna Cotta",
@@ -65,6 +73,7 @@ const info = [
     price: 6.5,
     image: "./image-panna-cotta-desktop.jpg",
     id: 9,
+    amount: 0,
   },
 ];
 
@@ -85,7 +94,16 @@ function App() {
           />
         ))}
       </div>
-      <div class="cart"></div>
+      <div class="cart">
+        <h3>
+          Your Cart (<span>0</span>)
+        </h3>
+
+        <div class="display-empty-cart">
+          <img src="./illustration-empty-cart.svg" class="empty-cart-img" />
+          <p>Your added items will appear here</p>
+        </div>
+      </div>
     </>
   );
 }

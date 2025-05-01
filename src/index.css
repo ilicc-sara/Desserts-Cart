@@ -28,7 +28,8 @@ h1 {
 
 .cart {
   background-color: rgb(136, 112, 216);
-  height: 100%;
+  padding: 20px;
+  height: fit-content;
 }
 
 .desert-item {
@@ -60,6 +61,18 @@ h1 {
   transform: translate(-50%, 50%);
 }
 
+.cart-button-add {
+  background-color: orange;
+}
+
 .info-cont {
   line-height: 20px;
+}
+
+.display-empty-cart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
