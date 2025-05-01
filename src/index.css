@@ -10,9 +10,14 @@
 
 .desserts-list {
   background-color: palevioletred;
-  height: 100%;
+  height: fit-content;
   position: relative;
-  padding-top: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  row-gap: 10px;
 }
 
 h1 {
@@ -24,4 +29,37 @@ h1 {
 .cart {
   background-color: rgb(136, 112, 216);
   height: 100%;
+}
+
+.desert-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dessert-pic-cont {
+  position: relative;
+}
+
+.dessert-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.cart-button {
+  border: 1px solid black;
+  background-color: wheat;
+  width: 150px;
+  border-radius: 555555px;
+  text-align: center;
+  bottom: 5px;
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translate(-50%, 50%);
+}
+
+.info-cont {
+  line-height: 20px;
 }
