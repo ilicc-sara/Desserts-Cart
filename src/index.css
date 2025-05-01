@@ -28,7 +28,7 @@ h1 {
 
 .cart {
   background-color: rgb(136, 112, 216);
-  padding: 20px;
+  padding: 15px;
   height: fit-content;
 }
 
@@ -59,6 +59,7 @@ h1 {
   left: 50%;
   bottom: 5px;
   transform: translate(-50%, 50%);
+  cursor: pointer;
 }
 
 .cart-button-full {
@@ -83,6 +84,7 @@ h1 {
   border-radius: 333px;
   border: 0.5px solid black;
   background: none;
+  cursor: pointer;
 }
 
 .info-cont {
@@ -99,4 +101,25 @@ h1 {
 
 .hidden {
   display: none;
+}
+
+.cart-item {
+  border: 0.5px solid black;
+  width: 100%;
+  padding-left: 5px;
+  position: relative;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+
+  width: 22px;
+  height: 22px;
+  border-radius: 333px;
+  border: 0.5px solid black;
+  background: none;
+  cursor: pointer;
 }

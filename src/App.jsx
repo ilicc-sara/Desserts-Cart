@@ -79,6 +79,16 @@ const info = [
 
 function App() {
   const [items, setItems] = useState(info);
+
+  const totalAmount = items.reduce((acc, cur) => {
+    return acc + cur.amount;
+  }, 0);
+
+  const totalPrice = items
+    .reduce((acc, cur) => {
+      return acc + cur.price * cur.amount;
+    }, 0)
+    .toFixed(2);
   return (
     <>
       <div class="desserts-list">
@@ -98,25 +108,25 @@ function App() {
       </div>
       <div class="cart">
         <h3>
-          Your Cart (
-          <span>
-            {items.reduce((acc, cur) => {
-              return acc + cur.amount;
-            }, 0)}
-            {/* {items.reduce((acc, cur) => {
-              return acc + cur.price * cur.amount;
-            }, 0)} */}
-          </span>
-          )
+          Your Cart (<span>{totalAmount}</span>)
         </h3>
 
-        <div class="display-empty-cart">
+        <div class={`display-empty-cart ${totalAmount === 0 ? "" : "hidden"}`}>
           <img src="./illustration-empty-cart.svg" class="empty-cart-img" />
           <p>Your added items will appear here</p>
         </div>
 
         <div class="cart-list">
-          <article></article>
+          <article class="cart-item">
+            <p>Waffle with Berries</p>
+            <div class="cart-item-info">
+              <span>3X</span> <span>@ $6.50</span> <span>@ 19.5</span>
+            </div>
+
+            <button class="delete-btn">X</button>
+          </article>
+
+          <h3> Order Total: $ {totalPrice}</h3>
         </div>
       </div>
     </>
