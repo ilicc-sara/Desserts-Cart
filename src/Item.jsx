@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 function Item(props) {
-  const { type, name, price, image, amount, setItems, id, setCartItems } =
-    props;
+  // prettier-ignore
+  const {type, name, price, image, cartItems, setItems, id, setCartItems, increaseAmount, decreseAmount} = props;
 
   const [isInCard, setIsInCard] = useState(false);
 
@@ -19,12 +19,6 @@ function Item(props) {
     setIsInCard(true);
   }
 
-  function increaseCartAmount(id) {
-    setCartItems((previous) =>
-      previous.id === id ? { ...previous, amount: amount + 1 } : previous
-    );
-  }
-
   return (
     <article class="desert-item">
       <div class="dessert-pic-cont">
@@ -32,11 +26,8 @@ function Item(props) {
 
         {!isInCard && (
           <div
-            class={`cart-button-empty`}
-            onClick={() => {
-              // increaseAmount(id);
-              makeCartItem(name, id, price, amount);
-            }}
+            class="cart-button-empty"
+            onClick={() => makeCartItem(name, id, price)}
           >
             <i class="bx bx-cart-add">
               {" "}
@@ -46,23 +37,12 @@ function Item(props) {
         )}
 
         {isInCard && (
-          <div class={`cart-button-full`}>
-            <button
-              class="btn"
-              onClick={() => {
-                decreseAmount(id);
-              }}
-            >
+          <div class="cart-button-full">
+            <button class="btn" onClick={() => decreseAmount(id)}>
               -
             </button>
-            <span>{amount}</span>
-            <button
-              class="btn"
-              onClick={() => {
-                // increaseAmount(id);
-                increaseCartAmount(id);
-              }}
-            >
+            <span>{1}</span>
+            <button class="btn" onClick={() => increaseAmount(id)}>
               +
             </button>
           </div>
