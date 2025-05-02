@@ -84,22 +84,6 @@ function App() {
     }, 0)
     .toFixed(2);
 
-  function increaseAmount(id) {
-    setCartItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount + 1 } : item
-      )
-    );
-  }
-
-  function decreseAmount(id) {
-    setCartItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount - 1 } : item
-      )
-    );
-  }
-
   return (
     <>
       <div class="desserts-list">
@@ -112,11 +96,8 @@ function App() {
             price={item.price}
             image={item.image}
             id={item.id}
-            cartItems={cartItems}
             setItems={setItems}
             setCartItems={setCartItems}
-            increaseAmount={increaseAmount}
-            decreseAmount={decreseAmount}
           />
         ))}
       </div>
@@ -143,6 +124,7 @@ function App() {
               price={cartItem.price}
               amount={cartItem.amount}
               id={cartItem.id}
+              setCartItems={setCartItems}
             />
           ))}
           <h3> Order Total: $ {totalPrice}</h3>
