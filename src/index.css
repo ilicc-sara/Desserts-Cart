@@ -124,6 +124,12 @@ h1 {
   cursor: pointer;
 }
 
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .cart-item-info {
   display: flex;
   justify-content: flex-start;

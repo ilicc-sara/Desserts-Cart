@@ -124,7 +124,8 @@ function App() {
           Your Cart (<span>{totalAmount}</span>)
         </h3>
 
-        <div class={`display-empty-cart ${totalAmount === 0 ? "" : "hidden"}`}>
+        {/* <div class={`display-empty-cart ${totalAmount === 0 ? "" : "hidden"}`}> */}
+        <div class={`display-empty-cart`}>
           <img
             src="./images/illustration-empty-cart.svg"
             class="empty-cart-img"
@@ -132,7 +133,8 @@ function App() {
           <p>Your added items will appear here</p>
         </div>
 
-        <div class={`cart-list ${cartItems.length === 0 ? "hidded" : ""}`}>
+        {/* <div class={`cart-list ${cartItems.length === 0 ? "hidded" : ""}`}> */}
+        <div class={`cart-list`}>
           {cartItems.map((cartItem, index) => (
             <CartItem
               key={index}

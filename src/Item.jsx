@@ -20,6 +20,24 @@ function Item(props) {
     );
   }
 
+  function makeCartItem(name, id, price, amount) {
+    setCartItems((previous) => [
+      ...previous,
+      {
+        name: name,
+        id: id,
+        price: price,
+        amount: amount,
+      },
+    ]);
+  }
+
+  function increaseCartAmount(id) {
+    setCartItems((previous) =>
+      previous.id === id ? { ...previous, amount: amount + 1 } : previous
+    );
+  }
+
   return (
     <article class="desert-item">
       <div class="dessert-pic-cont">
@@ -29,8 +47,8 @@ function Item(props) {
         <div
           class={`cart-button-empty ${amount === 0 ? "" : "hidden"}`}
           onClick={() => {
-            // setCartItems({ name: name });
             increaseAmount(id);
+            makeCartItem(name, id, price, amount);
           }}
         >
           <i class="bx bx-cart-add">
@@ -41,11 +59,22 @@ function Item(props) {
 
         {/* <div class="cart-button-full"> */}
         <div class={`cart-button-full ${amount > 0 ? "" : "hidden"}`}>
-          <button class="btn" onClick={() => decreseAmount(id)}>
+          <button
+            class="btn"
+            onClick={() => {
+              decreseAmount(id);
+            }}
+          >
             -
           </button>
           <span>{amount}</span>
-          <button class="btn" onClick={() => increaseAmount(id)}>
+          <button
+            class="btn"
+            onClick={() => {
+              increaseAmount(id);
+              increaseCartAmount(id);
+            }}
+          >
             +
           </button>
         </div>

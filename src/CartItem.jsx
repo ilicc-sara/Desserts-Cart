@@ -9,7 +9,8 @@ function CartItem(props) {
       <p>{name}</p>
       <div class="cart-item-info">
         <span>{amount}X</span>
-        <span>@ ${price}</span> <span>@ {totalPrice}</span>
+        <span>@ ${price.toFixed(2)}</span>{" "}
+        <span>$ {totalPrice.toFixed(2)}</span>
       </div>
 
       <button class="delete-btn">X</button>
