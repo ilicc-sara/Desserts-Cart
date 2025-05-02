@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function CartItem(props) {
-  const { name, price, amount, id } = props;
+  const { name, price, amount = 1, id } = props;
 
   const totalPrice = Number(amount) * Number(price);
   return (

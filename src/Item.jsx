@@ -4,32 +4,19 @@ function Item(props) {
   const { type, name, price, image, amount, setItems, id, setCartItems } =
     props;
 
-  function increaseAmount(id) {
-    setItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount + 1 } : item
-      )
-    );
-  }
+  const [isInCard, setIsInCard] = useState(false);
 
-  function decreseAmount(id) {
-    setItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount - 1 } : item
-      )
-    );
-  }
-
-  function makeCartItem(name, id, price, amount) {
+  function makeCartItem(name, id, price) {
     setCartItems((previous) => [
       ...previous,
       {
         name: name,
         id: id,
         price: price,
-        amount: amount,
+        amount: 1,
       },
     ]);
+    setIsInCard(true);
   }
 
   function increaseCartAmount(id) {
@@ -43,41 +30,43 @@ function Item(props) {
       <div class="dessert-pic-cont">
         <img class="dessert-pic" src={image} />
 
-        {/* <div class="cart-button-empty"> */}
-        <div
-          class={`cart-button-empty ${amount === 0 ? "" : "hidden"}`}
-          onClick={() => {
-            increaseAmount(id);
-            makeCartItem(name, id, price, amount);
-          }}
-        >
-          <i class="bx bx-cart-add">
-            {" "}
-            <span>Add to Cart</span>
-          </i>
-        </div>
+        {!isInCard && (
+          <div
+            class={`cart-button-empty`}
+            onClick={() => {
+              // increaseAmount(id);
+              makeCartItem(name, id, price, amount);
+            }}
+          >
+            <i class="bx bx-cart-add">
+              {" "}
+              <span>Add to Cart</span>
+            </i>
+          </div>
+        )}
 
-        {/* <div class="cart-button-full"> */}
-        <div class={`cart-button-full ${amount > 0 ? "" : "hidden"}`}>
-          <button
-            class="btn"
-            onClick={() => {
-              decreseAmount(id);
-            }}
-          >
-            -
-          </button>
-          <span>{amount}</span>
-          <button
-            class="btn"
-            onClick={() => {
-              increaseAmount(id);
-              increaseCartAmount(id);
-            }}
-          >
-            +
-          </button>
-        </div>
+        {isInCard && (
+          <div class={`cart-button-full`}>
+            <button
+              class="btn"
+              onClick={() => {
+                decreseAmount(id);
+              }}
+            >
+              -
+            </button>
+            <span>{amount}</span>
+            <button
+              class="btn"
+              onClick={() => {
+                // increaseAmount(id);
+                increaseCartAmount(id);
+              }}
+            >
+              +
+            </button>
+          </div>
+        )}
       </div>
 
       <div class="info-cont">

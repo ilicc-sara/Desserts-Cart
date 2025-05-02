@@ -9,7 +9,7 @@
 }
 
 .desserts-list {
-  background-color: palevioletred;
+  /* background-color: palevioletred; */
   height: fit-content;
   position: relative;
   padding-top: 50px;
@@ -27,9 +27,11 @@ h1 {
 }
 
 .cart {
-  background-color: rgb(136, 112, 216);
+  /* background-color: rgb(136, 112, 216); */
   padding: 15px;
   height: fit-content;
+  border: 0.5px solid rgb(167, 167, 167);
+  border-radius: 10px;
 }
 
 .desert-item {
@@ -125,9 +127,14 @@ h1 {
 }
 
 .cart-list {
+  margin: 10px 0;
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.cart-item {
+  border-radius: 5px;
 }
 
 .cart-item-info {

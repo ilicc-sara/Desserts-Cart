@@ -81,9 +81,7 @@ const info = [
 function App() {
   const [items, setItems] = useState(info);
 
-  const [cartItems, setCartItems] = useState([
-    // { name: "Sara", id: 1, price: 70, amount: 3 },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const totalAmount = items.reduce((acc, cur) => {
     return acc + cur.amount;
@@ -94,6 +92,23 @@ function App() {
       return acc + cur.price * cur.amount;
     }, 0)
     .toFixed(2);
+
+  function increaseAmount(id) {
+    setCartItems((previous) =>
+      previous.map((item) =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      )
+    );
+  }
+
+  function decreseAmount(id) {
+    setCartItems((previous) =>
+      previous.map((item) =>
+        item.id === id ? { ...item, amount: item.amount - 1 } : item
+      )
+    );
+  }
+
   return (
     <>
       <div class="desserts-list">
@@ -109,18 +124,13 @@ function App() {
             amount={item.amount}
             setItems={setItems}
             setCartItems={setCartItems}
+            increaseAmount={increaseAmount}
+            decreseAmount={decreseAmount}
           />
         ))}
       </div>
       <div class="cart">
-        <h3
-        // onClick={() =>
-        //   setCartItems((previous) => [
-        //     ...previous,
-        //     { name: "Ljubisa", id: 2, price: 40, amount: 2 },
-        //   ])
-        // }
-        >
+        <h3>
           Your Cart (<span>{totalAmount}</span>)
         </h3>
 
