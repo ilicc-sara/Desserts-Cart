@@ -101,10 +101,6 @@ h1 {
   align-items: center;
 }
 
-.hidden {
-  display: none;
-}
-
 .cart-item {
   border: 0.5px solid black;
   width: 100%;
@@ -141,4 +137,16 @@ h1 {
   display: flex;
   justify-content: flex-start;
   gap: 15px;
+}
+
+.confirm-button {
+  background-color: orange;
+  border: none;
+  height: 30px;
+  border-radius: 10444px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }

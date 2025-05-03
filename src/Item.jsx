@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 function Item(props) {
   // prettier-ignore
-  const {type, name, price, image, id, setCartItems} = props;
+  const {type, name, price, image, id, setCartItems, isInCard, setItems} = props;
 
   const [amount, setAmount] = useState(1);
-  const [isInCard, setIsInCard] = useState(false);
+  // const [isInCard, setIsInCard] = useState(false);
 
   function increaseAmount(id) {
     setCartItems((previous) =>
@@ -32,8 +32,13 @@ function Item(props) {
 
     if (amount === 1) {
       setCartItems((previous) => previous.filter((item) => item.id !== id));
-      setIsInCard(false);
-      // setAmount(0);
+      // setIsInCard(false);
+
+      setItems((previous) =>
+        previous.map((product) =>
+          product.id === id ? { ...product, isInCard: false } : product
+        )
+      );
     }
   }
 
@@ -47,12 +52,21 @@ function Item(props) {
         amount: 1,
       },
     ]);
-    setIsInCard(true);
+    setItems((previous) =>
+      previous.map((product) =>
+        product.id === id ? { ...product, isInCard: true } : product
+      )
+    );
+    setAmount(1);
   }
 
   function deleteCartItem(id) {
     setCartItems((previous) => previous.filter((item) => item.id !== id));
-    setIsInCard(false);
+    setItems((previous) =>
+      previous.map((product) =>
+        product.id === id ? { ...product, isInCard: false } : product
+      )
+    );
     setAmount(1);
   }
 
