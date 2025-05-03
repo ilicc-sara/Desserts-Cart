@@ -50,6 +50,7 @@ function Item(props) {
         id: id,
         price: price,
         amount: 1,
+        image: image,
       },
     ]);
     setItems((previous) =>

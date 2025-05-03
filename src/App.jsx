@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Item from "./Item.jsx";
 import CartItem from "./CartItem.jsx";
+import OrderItem from "./OrderItem.jsx";
 
 const info = [
   {
@@ -147,11 +148,30 @@ function App() {
               setCartItems={setCartItems}
             />
           ))}
+
           <h3> Order Total: $ {totalPrice}</h3>
 
           <button class="confirm-button" onClick={() => restore()}>
             Confirm Order
           </button>
+        </div>
+      </div>
+
+      <div class="order-list hidden">
+        <h3>Order Confirmed</h3>
+        <p>We hope you enjoy your food!</p>
+
+        <div class="orders-cont">
+          {cartItems.map((cartItem, index) => (
+            <OrderItem
+              key={index}
+              name={cartItem.name}
+              price={cartItem.price}
+              amount={cartItem.amount}
+              id={cartItem.id}
+              image={cartItem.image}
+            />
+          ))}
         </div>
       </div>
     </>
