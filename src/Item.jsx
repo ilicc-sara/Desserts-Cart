@@ -4,8 +4,8 @@ function Item(props) {
   // prettier-ignore
   const {type, name, price, image, id, setCartItems} = props;
 
-  const [isInCard, setIsInCard] = useState(false);
   const [amount, setAmount] = useState(1);
+  const [isInCard, setIsInCard] = useState(false);
 
   function increaseAmount(id) {
     setCartItems((previous) =>
@@ -18,16 +18,22 @@ function Item(props) {
 
   function decreseAmount(id) {
     setCartItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount - 1 } : item
-      )
+      previous.map((item) => {
+        if (item.amount > 1) {
+          return item.id === id ? { ...item, amount: item.amount - 1 } : item;
+        } else return item;
+      })
     );
-    setAmount((previous) => previous - 1);
+    setAmount((previous) => {
+      if (previous > 1) {
+        return previous - 1;
+      } else return previous;
+    });
 
     if (amount === 1) {
       setCartItems((previous) => previous.filter((item) => item.id !== id));
       setIsInCard(false);
-      setAmount(0);
+      // setAmount(0);
     }
   }
 
@@ -42,6 +48,12 @@ function Item(props) {
       },
     ]);
     setIsInCard(true);
+  }
+
+  function deleteCartItem(id) {
+    setCartItems((previous) => previous.filter((item) => item.id !== id));
+    setIsInCard(false);
+    setAmount(1);
   }
 
   return (
@@ -76,7 +88,9 @@ function Item(props) {
 
       <div class="info-cont">
         <p class="type">{type}</p>
-        <h4 class="name">{name}</h4>
+        <h4 class="name" onClick={() => deleteCartItem(id)}>
+          {name}
+        </h4>
         <span class="price">$ {price.toFixed(2)}</span>
       </div>
     </article>
