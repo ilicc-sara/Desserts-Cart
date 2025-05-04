@@ -2,10 +2,15 @@ import React, { useState } from "react";
 
 function Item(props) {
   // prettier-ignore
-  const {type, name, price, image, id, setCartItems, isInCard, setItems} = props;
+  const {type, name, price, image, id, setCartItems, cartItems} = props;
 
-  const [amount, setAmount] = useState(1);
-  // const [isInCard, setIsInCard] = useState(false);
+  function getIsItemInCart(id) {
+    return cartItems.includes(cartItems.find((item) => item.id === id));
+  }
+
+  function findItemAmount(id) {
+    return cartItems.find((item) => item?.id === id)?.amount;
+  }
 
   function increaseAmount(id) {
     setCartItems((previous) =>
@@ -13,7 +18,6 @@ function Item(props) {
         item.id === id ? { ...item, amount: item.amount + 1 } : item
       )
     );
-    setAmount((previous) => previous + 1);
   }
 
   function decreseAmount(id) {
@@ -24,21 +28,9 @@ function Item(props) {
         } else return item;
       })
     );
-    setAmount((previous) => {
-      if (previous > 1) {
-        return previous - 1;
-      } else return previous;
-    });
 
-    if (amount === 1) {
+    if (findItemAmount(id) === 1) {
       setCartItems((previous) => previous.filter((item) => item.id !== id));
-      // setIsInCard(false);
-
-      setItems((previous) =>
-        previous.map((product) =>
-          product.id === id ? { ...product, isInCard: false } : product
-        )
-      );
     }
   }
 
@@ -53,22 +45,6 @@ function Item(props) {
         image: image,
       },
     ]);
-    setItems((previous) =>
-      previous.map((product) =>
-        product.id === id ? { ...product, isInCard: true } : product
-      )
-    );
-    setAmount(1);
-  }
-
-  function deleteCartItem(id) {
-    setCartItems((previous) => previous.filter((item) => item.id !== id));
-    setItems((previous) =>
-      previous.map((product) =>
-        product.id === id ? { ...product, isInCard: false } : product
-      )
-    );
-    setAmount(1);
   }
 
   return (
@@ -76,7 +52,7 @@ function Item(props) {
       <div class="dessert-pic-cont">
         <img class="dessert-pic" src={image} />
 
-        {!isInCard && (
+        {!getIsItemInCart(id) && (
           <div
             class="cart-button-empty"
             onClick={() => makeCartItem(name, id, price)}
@@ -88,12 +64,12 @@ function Item(props) {
           </div>
         )}
 
-        {isInCard && (
+        {getIsItemInCart(id) && (
           <div class="cart-button-full">
             <button class="btn" onClick={() => decreseAmount(id)}>
               -
             </button>
-            <span>{amount}</span>
+            <span>{findItemAmount(id)}</span>
             {/* + i - dugme ce biti vidljivi jedino kada je item vec u cartu */}
             {/* napraviti var ili fju getIsItemInCart(id)  */}
             {/* ako je ovo true znam da trebam + ili - prikazati */}

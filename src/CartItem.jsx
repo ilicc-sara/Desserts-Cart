@@ -6,11 +6,6 @@ function CartItem(props) {
 
   function deleteCartItem(id) {
     setCartItems((previous) => previous.filter((item) => item.id !== id));
-    setItems((previous) =>
-      previous.map((product) =>
-        product.id === id ? { ...product, isInCard: false } : product
-      )
-    );
   }
   return (
     <article class="cart-item">

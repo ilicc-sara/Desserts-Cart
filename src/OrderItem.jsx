@@ -14,9 +14,6 @@ function OrderItem(props) {
         </div>
       </div>
       <span class="order-detail-price">$ {totalPrice.toFixed(2)}</span>
-      {/* <button class="delete-btn" onClick={() => deleteCartItem(id)}>
-        X
-      </button> */}
     </article>
   );
 }

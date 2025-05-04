@@ -11,7 +11,6 @@ const info = [
     price: 6.5,
     image: "./images/image-waffle-desktop.jpg",
     id: 1,
-    isInCard: false,
   },
   {
     type: "Crème Brûlée",
@@ -19,7 +18,6 @@ const info = [
     price: 7.0,
     image: "./images/image-creme-brulee-desktop.jpg",
     id: 2,
-    isInCard: false,
   },
   {
     type: "Macaron",
@@ -27,7 +25,6 @@ const info = [
     price: 8.0,
     image: "./images/image-macaron-desktop.jpg",
     id: 3,
-    isInCard: false,
   },
   {
     type: "Tiramisu",
@@ -35,7 +32,6 @@ const info = [
     price: 5.5,
     image: "./images/image-tiramisu-desktop.jpg",
     id: 4,
-    isInCard: false,
   },
   {
     type: "Baklava",
@@ -43,7 +39,6 @@ const info = [
     price: 4.0,
     image: "./images/image-baklava-desktop.jpg",
     id: 5,
-    isInCard: false,
   },
   {
     type: "Pie",
@@ -51,7 +46,6 @@ const info = [
     price: 5.0,
     image: "./images/image-meringue-desktop.jpg",
     id: 6,
-    isInCard: false,
   },
   {
     type: "Cake",
@@ -59,7 +53,6 @@ const info = [
     price: 4.5,
     image: "./images/image-cake-desktop.jpg",
     id: 7,
-    isInCard: false,
   },
   {
     type: "Brownie",
@@ -67,7 +60,6 @@ const info = [
     price: 4.5,
     image: "./images/image-brownie-desktop.jpg",
     id: 8,
-    isInCard: false,
   },
   {
     type: "Panna Cotta",
@@ -75,7 +67,6 @@ const info = [
     price: 6.5,
     image: "./images/image-panna-cotta-desktop.jpg",
     id: 9,
-    isInCard: false,
   },
 ];
 
@@ -84,7 +75,7 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
-  const [order, setOrder] = useState(false);
+  const [confirmOrder, setConfirmOrder] = useState(false);
 
   const totalAmount = cartItems.reduce((acc, cur) => {
     return acc + cur.amount;
@@ -98,17 +89,12 @@ function App() {
 
   function restore() {
     setCartItems([]);
-    // setItems((previous) =>
-    //   previous.map((product) =>
-    //     product ? { ...product, isInCard: false } : product
-    //   )
-    // );
-    setItems((prev) => {
-      return prev.map((item) => {
-        return { ...item, isInCard: false };
-      });
-    });
-    setOrder(false);
+    // setItems((prev) => {
+    //   return prev.map((item) => {
+    //     return { ...item, isInCard: false };
+    //   });
+    // });
+    setConfirmOrder(false);
   }
 
   return (
@@ -123,9 +109,11 @@ function App() {
             price={item.price}
             image={item.image}
             id={item.id}
-            isInCard={item.isInCard}
             setCartItems={setCartItems}
             setItems={setItems}
+            cartItems={cartItems}
+            // getIsItemInCart={getIsItemInCart}
+            // findItemAmount={findItemAmount}
           />
         ))}
       </div>
@@ -159,13 +147,13 @@ function App() {
 
           <h3> Order Total: $ {totalPrice}</h3>
 
-          <button class="confirm-button" onClick={() => setOrder(true)}>
+          <button class="confirm-button" onClick={() => setConfirmOrder(true)}>
             Confirm Order
           </button>
         </div>
       </div>
 
-      {order && (
+      {confirmOrder && (
         <div class="order-cont">
           <h3>Order Confirmed</h3>
           <p>We hope you enjoy your food!</p>
@@ -189,7 +177,7 @@ function App() {
         </div>
       )}
 
-      {order && <div class="overlay"></div>}
+      {confirmOrder && <div class="overlay"></div>}
     </>
   );
 }
