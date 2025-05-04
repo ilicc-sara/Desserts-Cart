@@ -28,7 +28,6 @@ function Item(props) {
         } else return item;
       })
     );
-
     if (findItemAmount(id) === 1) {
       setCartItems((previous) => previous.filter((item) => item.id !== id));
     }

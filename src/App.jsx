@@ -177,7 +177,9 @@ function App() {
         </div>
       )}
 
-      {confirmOrder && <div class="overlay"></div>}
+      {confirmOrder && (
+        <div class="overlay" onClick={() => setConfirmOrder(false)}></div>
+      )}
     </>
   );
 }
