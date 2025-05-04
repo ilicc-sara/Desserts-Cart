@@ -84,6 +84,8 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
+  const [order, setOrder] = useState(false);
+
   const totalAmount = cartItems.reduce((acc, cur) => {
     return acc + cur.amount;
   }, 0);
@@ -106,6 +108,7 @@ function App() {
         return { ...item, isInCard: false };
       });
     });
+    setOrder(false);
   }
 
   return (
@@ -156,29 +159,37 @@ function App() {
 
           <h3> Order Total: $ {totalPrice}</h3>
 
-          <button class="confirm-button" onClick={() => restore()}>
+          <button class="confirm-button" onClick={() => setOrder(true)}>
             Confirm Order
           </button>
         </div>
       </div>
 
-      <div class="order-list">
-        <h3>Order Confirmed</h3>
-        <p>We hope you enjoy your food!</p>
+      {order && (
+        <div class="order-cont">
+          <h3>Order Confirmed</h3>
+          <p>We hope you enjoy your food!</p>
 
-        <div class="orders-cont">
-          {cartItems.map((cartItem, index) => (
-            <OrderItem
-              key={index}
-              name={cartItem.name}
-              price={cartItem.price}
-              amount={cartItem.amount}
-              id={cartItem.id}
-              image={cartItem.image}
-            />
-          ))}
+          <div class="orders-list">
+            {cartItems.map((cartItem, index) => (
+              <OrderItem
+                key={index}
+                name={cartItem.name}
+                price={cartItem.price}
+                amount={cartItem.amount}
+                id={cartItem.id}
+                image={cartItem.image}
+              />
+            ))}
+          </div>
+          <h3> Order Total: $ {totalPrice}</h3>
+          <button class="restore-btn" onClick={() => restore()}>
+            Start New Order
+          </button>
         </div>
-      </div>
+      )}
+
+      {order && <div class="overlay"></div>}
     </>
   );
 }
