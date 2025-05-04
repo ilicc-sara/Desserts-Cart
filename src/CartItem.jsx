@@ -13,7 +13,7 @@ function CartItem(props) {
     );
   }
   return (
-    <article data-id={id} class="cart-item">
+    <article class="cart-item">
       <p>{name}</p>
       <div class="cart-item-info">
         <span>{amount}X</span>

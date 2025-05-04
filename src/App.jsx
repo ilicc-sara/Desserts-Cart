@@ -96,11 +96,16 @@ function App() {
 
   function restore() {
     setCartItems([]);
-    setItems((previous) =>
-      previous.map((product) =>
-        product ? { ...product, isInCard: false } : product
-      )
-    );
+    // setItems((previous) =>
+    //   previous.map((product) =>
+    //     product ? { ...product, isInCard: false } : product
+    //   )
+    // );
+    setItems((prev) => {
+      return prev.map((item) => {
+        return { ...item, isInCard: false };
+      });
+    });
   }
 
   return (
@@ -157,7 +162,7 @@ function App() {
         </div>
       </div>
 
-      <div class="order-list hidden">
+      <div class="order-list">
         <h3>Order Confirmed</h3>
         <p>We hope you enjoy your food!</p>
 

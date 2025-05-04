@@ -94,6 +94,11 @@ function Item(props) {
               -
             </button>
             <span>{amount}</span>
+            {/* + i - dugme ce biti vidljivi jedino kada je item vec u cartu */}
+            {/* napraviti var ili fju getIsItemInCart(id)  */}
+            {/* ako je ovo true znam da trebam + ili - prikazati */}
+            {/* ako prikazujem + i - znam da je item u cart i da ima amount */}
+            {/* nadji taj item u cart i prikazi njegov amount na ekranu */}
             <button class="btn" onClick={() => increaseAmount(id)}>
               +
             </button>
