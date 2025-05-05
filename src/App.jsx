@@ -72,9 +72,7 @@ const info = [
 
 function App() {
   const [items, setItems] = useState(info);
-
   const [cartItems, setCartItems] = useState([]);
-
   const [confirmOrder, setConfirmOrder] = useState(false);
 
   const totalAmount = cartItems.reduce((acc, cur) => {
@@ -87,6 +85,14 @@ function App() {
     }, 0)
     .toFixed(2);
 
+  function getIsItemInCart(id) {
+    return cartItems.includes(cartItems.find((item) => item.id === id));
+  }
+
+  function findItemAmount(id) {
+    return cartItems.find((item) => item?.id === id)?.amount;
+  }
+
   function restore() {
     setCartItems([]);
     // setItems((prev) => {
@@ -97,23 +103,57 @@ function App() {
     setConfirmOrder(false);
   }
 
+  function increaseAmount(id) {
+    setCartItems((previous) =>
+      previous.map((item) =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      )
+    );
+  }
+
+  function decreseAmount(id) {
+    setCartItems((previous) =>
+      previous.map((item) => {
+        if (item.amount > 1) {
+          return item.id === id ? { ...item, amount: item.amount - 1 } : item;
+        } else return item;
+      })
+    );
+    if (itemAmount === 1) {
+      setCartItems((previous) => previous.filter((item) => item.id !== id));
+    }
+  }
+
+  function makeCartItem(name, id, price, image) {
+    setCartItems((previous) => [
+      ...previous,
+      {
+        name: name,
+        id: id,
+        price: price,
+        amount: 1,
+        image: image,
+      },
+    ]);
+  }
+
+  function deleteCartItem(id) {
+    setCartItems((previous) => previous.filter((item) => item.id !== id));
+  }
+
   return (
     <>
       <div class="desserts-list">
         <h1>Desserts</h1>
         {items.map((item) => (
           <Item
+            {...item}
             key={item.id}
-            type={item.type}
-            name={item.name}
-            price={item.price}
-            image={item.image}
-            id={item.id}
-            setCartItems={setCartItems}
-            setItems={setItems}
-            cartItems={cartItems}
-            // getIsItemInCart={getIsItemInCart}
-            // findItemAmount={findItemAmount}
+            getIsItemInCart={getIsItemInCart}
+            findItemAmount={findItemAmount}
+            increaseAmount={increaseAmount}
+            decreseAmount={decreseAmount}
+            makeCartItem={makeCartItem}
           />
         ))}
       </div>
@@ -123,7 +163,6 @@ function App() {
         </h3>
 
         <div class={`display-empty-cart ${totalAmount === 0 ? "" : "hidden"}`}>
-          {/* <div class={`display-empty-cart`}> */}
           <img
             src="./images/illustration-empty-cart.svg"
             class="empty-cart-img"
@@ -132,16 +171,12 @@ function App() {
         </div>
 
         <div class={`cart-list ${totalAmount === 0 ? "hidden" : ""}`}>
-          {/* <div class={`cart-list`}> */}
           {cartItems.map((cartItem, index) => (
             <CartItem
               key={index}
-              name={cartItem.name}
-              price={cartItem.price}
-              amount={cartItem.amount}
-              id={cartItem.id}
+              {...cartItem}
               setItems={setItems}
-              setCartItems={setCartItems}
+              deleteCartItem={deleteCartItem}
             />
           ))}
 
@@ -159,15 +194,8 @@ function App() {
           <p>We hope you enjoy your food!</p>
 
           <div class="orders-list">
-            {cartItems.map((cartItem, index) => (
-              <OrderItem
-                key={index}
-                name={cartItem.name}
-                price={cartItem.price}
-                amount={cartItem.amount}
-                id={cartItem.id}
-                image={cartItem.image}
-              />
+            {cartItems.map((orderItem, index) => (
+              <OrderItem key={index} {...orderItem} />
             ))}
           </div>
           <h3> Order Total: $ {totalPrice}</h3>

@@ -2,59 +2,19 @@ import React, { useState } from "react";
 
 function Item(props) {
   // prettier-ignore
-  const {type, name, price, image, id, setCartItems, cartItems} = props;
-
-  function getIsItemInCart(id) {
-    return cartItems.includes(cartItems.find((item) => item.id === id));
-  }
-
-  function findItemAmount(id) {
-    return cartItems.find((item) => item?.id === id)?.amount;
-  }
-
-  function increaseAmount(id) {
-    setCartItems((previous) =>
-      previous.map((item) =>
-        item.id === id ? { ...item, amount: item.amount + 1 } : item
-      )
-    );
-  }
-
-  function decreseAmount(id) {
-    setCartItems((previous) =>
-      previous.map((item) => {
-        if (item.amount > 1) {
-          return item.id === id ? { ...item, amount: item.amount - 1 } : item;
-        } else return item;
-      })
-    );
-    if (findItemAmount(id) === 1) {
-      setCartItems((previous) => previous.filter((item) => item.id !== id));
-    }
-  }
-
-  function makeCartItem(name, id, price) {
-    setCartItems((previous) => [
-      ...previous,
-      {
-        name: name,
-        id: id,
-        price: price,
-        amount: 1,
-        image: image,
-      },
-    ]);
-  }
+  const {type, name, price, image, id, findItemAmount, getIsItemInCart, increaseAmount, decreseAmount, makeCartItem } = props;
+  const isItemInCard = getIsItemInCart(id);
+  const itemAmount = findItemAmount(id);
 
   return (
     <article class="desert-item">
       <div class="dessert-pic-cont">
         <img class="dessert-pic" src={image} />
 
-        {!getIsItemInCart(id) && (
+        {!isItemInCard && (
           <div
             class="cart-button-empty"
-            onClick={() => makeCartItem(name, id, price)}
+            onClick={() => makeCartItem(name, id, price, image)}
           >
             <i class="bx bx-cart-add">
               {" "}
@@ -63,17 +23,12 @@ function Item(props) {
           </div>
         )}
 
-        {getIsItemInCart(id) && (
+        {isItemInCard && (
           <div class="cart-button-full">
             <button class="btn" onClick={() => decreseAmount(id)}>
               -
             </button>
-            <span>{findItemAmount(id)}</span>
-            {/* + i - dugme ce biti vidljivi jedino kada je item vec u cartu */}
-            {/* napraviti var ili fju getIsItemInCart(id)  */}
-            {/* ako je ovo true znam da trebam + ili - prikazati */}
-            {/* ako prikazujem + i - znam da je item u cart i da ima amount */}
-            {/* nadji taj item u cart i prikazi njegov amount na ekranu */}
+            <span>{itemAmount}</span>
             <button class="btn" onClick={() => increaseAmount(id)}>
               +
             </button>

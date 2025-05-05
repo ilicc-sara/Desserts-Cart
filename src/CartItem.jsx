@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 
 function CartItem(props) {
-  const { name, price, amount, id, setItems, setCartItems } = props;
+  const { name, price, amount, id, deleteCartItem } = props;
   const totalPrice = Number(amount) * Number(price);
 
-  function deleteCartItem(id) {
-    setCartItems((previous) => previous.filter((item) => item.id !== id));
-  }
   return (
     <article class="cart-item">
       <p>{name}</p>
