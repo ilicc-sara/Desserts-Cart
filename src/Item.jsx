@@ -25,7 +25,7 @@ function Item(props) {
 
         {isItemInCard && (
           <div class="cart-button-full">
-            <button class="btn" onClick={() => decreseAmount(id)}>
+            <button class="btn" onClick={() => decreseAmount(id, itemAmount)}>
               -
             </button>
             <span>{itemAmount}</span>
