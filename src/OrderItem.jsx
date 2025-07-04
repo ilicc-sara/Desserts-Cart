@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function OrderItem(props) {
   const { name, price, amount, id, image } = props;
